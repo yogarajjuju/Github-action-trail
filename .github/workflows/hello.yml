@@ -1,23 +1,23 @@
-# This is the name of your workflow
-name: Check out the code
+name: Set up Node.js
 
-# This is the EVENT (the trigger)
 on:
   push:
 
-# This is the JOB
 jobs:
-  # We give our job an ID
-  list-files:
-    # Tell it which "computer" to use
+  build-and-test:
     runs-on: ubuntu-latest
 
-    # These are the STEPS
     steps:
-      # Step 1: Use the 'checkout' tool to download our code
+      # Step 1: Download the code
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      # Step 2: Run a command to list the files
-      - name: List files in the repository
-        run: ls -l
+      # Step 2: Install Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # We're asking for version 20
+
+      # Step 3: Check if it worked
+      - name: Check Node.js version
+        run: node -v
