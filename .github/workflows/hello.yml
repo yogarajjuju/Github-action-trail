@@ -1,22 +1,23 @@
 # This is the name of your workflow
-name: Greet the User
+name: Check out the code
 
 # This is the EVENT (the trigger)
-# It runs when you 'push' code
 on:
   push:
 
-# This is the JOB (the set of tasks)
+# This is the JOB
 jobs:
-  # We give our job an ID, like 'say-hello'
-  say-hello:
-    # This tells the robot which "computer" to use
-    # 'ubuntu-latest' is just a clean, virtual computer
+  # We give our job an ID
+  list-files:
+    # Tell it which "computer" to use
     runs-on: ubuntu-latest
 
-    # These are the STEPS (the individual commands)
+    # These are the STEPS
     steps:
-      # Step 1: Give it a name
-      - name: Print a greeting
-        # Step 2: Tell it what to run
-        run: echo "Hello, World!"
+      # Step 1: Use the 'checkout' tool to download our code
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      # Step 2: Run a command to list the files
+      - name: List files in the repository
+        run: ls -l
